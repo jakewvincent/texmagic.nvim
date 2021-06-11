@@ -8,6 +8,10 @@ This is a very simple [Neovim](https://neovim.io) plugin that identifies magic c
 %! TEX program = xelatex
 ```
 
+### FYI
+* If the document started out with no magic comment, the default (`pdflatex`) is used.
+* Changing the tex program via magic comment will require reopening your file (or sourcing your $MYVIMRC)
+
 ## Use
 Install using your preferred package manager. If you're using [paq-nvim](https://github.com/savq/paq-nvim), for instance:
 
@@ -15,7 +19,7 @@ Install using your preferred package manager. If you're using [paq-nvim](https:/
 require('paq-nvim').paq{'jakewvincent/texmagic.nvim'}
 ```
 
-The plugin provides a function `texProgram()` which returns a string. In the case that the opened file has a `.tex` extension and has a magic comment, the `texProgram()` returns the program name in lowercase with whitespace removed. One way you might use `texProgram()` in your `init.lua` is to define a local variable that you pass to the configuration for whatever compiler system you're using. I'm using [latexmk](https://mg.readthedocs.io/latexmk.html) via [texlab](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#texlab), so my magic comment will work as an argument that texlab will pass to latexmk.
+The plugin provides a function `texProgram()` which returns a string. In the case that the opened file is not a TeX file or has no magic comment, `texProgram()` returns `pdflatex`. In the case that the opened file has a `.tex` extension and has a magic comment, the `texProgram()` returns the program name in lowercase with whitespace removed. One way you might use `texProgram()` in your `init.lua` is to define a local variable that you pass to the configuration for whatever compiler system you're using. I'm using [latexmk](https://mg.readthedocs.io/latexmk.html) via [texlab](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#texlab), so my magic comment will work as an argument that texlab will pass to latexmk.
 
 ```lua
 local tex_program = require('texmagic').texProgram()    -- retrieve tex program name
@@ -30,8 +34,9 @@ require'lspconfig'.texlab.setup{
             rootDirectory = nil;
             build = {
                 executable = "latexmk";
-                -- note tex_program variable below is concatenated w/ '-'
+                --           ↓↓↓↓↓↓↓↓↓↓↓
                 args = {"-"..tex_program, "-interaction=nonstopmode", "-synctex=1", "-outdir=.", "-auxdir=.build", "-pv", "%f"};
+                --           ↑↑↑↑↑↑↑↑↑↑↑
                 isContinuous = false;
             };
             auxDirectory = ".build";
