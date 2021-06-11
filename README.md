@@ -35,11 +35,11 @@ require'lspconfig'.texlab.setup{
             build = {
                 executable = "latexmk";
                 --           ↓↓↓↓↓↓↓↓↓↓↓
-                args = {"-"..tex_program, "-interaction=nonstopmode", "-synctex=1", "-outdir=.", "-auxdir=.build", "-pv", "%f"};
+                args = {"-"..tex_program, "-interaction=nonstopmode", "-synctex=1", "-outdir=.", "-auxdir=.", "-pv", "%f"};
                 --           ↑↑↑↑↑↑↑↑↑↑↑
                 isContinuous = false;
             };
-            auxDirectory = ".build";
+            auxDirectory = ".";
             forwardSearch = {
                 executable = "evince";
                 args = { "-f" };
