@@ -1,16 +1,14 @@
 local M = {}
 
 M.findMagicComments = function()
-    if vim.bo.filetype == "tex" then                            -- if current file has tex extension, ...
+    if vim.bo.filetype == "tex" then                            -- if current file is a tex file, ...
         local cur_file = vim.api.nvim_buf_get_name(0)           -- get name of current file
-        local magic = {}                                        -- table for storing magic comments
-        local tex_program = "pdflatex"
-        local tex_file = io.open(cur_file, "r")                 -- lua open tex file in read mode
+        local magic = {}                                        -- make table for storing magic comments
+        local tex_program = "pdflatex"                          -- set default value for tex_program
+        local tex_file = io.open(cur_file, "r")                 -- lua.open tex file in read mode
         local line = tex_file:read()                            -- grab first line
-        local i = 1                                             -- initialize counter variable
         while string.find(line, '%%%s*!%s*TEX') ~= nil do       -- as long as line has a magic tex comment, ...
             table.insert(magic, line)                           -- add it to table
-            i = i + 1                                           -- increment counter
             line = tex_file:read()                              -- get the next line
         end
         tex_file:close()                                        -- close the file
