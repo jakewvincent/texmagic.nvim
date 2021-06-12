@@ -48,6 +48,7 @@ require'lspconfig'.texlab.setup{
     }
 }
 ```
+## Improvements
 
 ## Links
 * Helpful defaults for Neovim's built-in LSP client: [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
