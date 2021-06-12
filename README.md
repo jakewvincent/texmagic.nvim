@@ -2,11 +2,14 @@
 
 ## Introduction
 
-This is a very simple [Neovim](https://neovim.io) plugin that identifies magic comments written atop a LaTeX document (as below), pulls the critical information, and makes it available for reference in settings passed to a TeX compiling system. Currently, it only pulls TeX program magic comments.
+This is a very simple [Neovim](https://neovim.io) plugin that identifies magic comments written atop a LaTeX document (like the one below), pulls the critical information, and makes it available for reference in settings passed to a TeX compiling system. Currently, it only pulls TeX program magic comments.
 
 ```
 %! TEX program = xelatex
 ```
+
+### Context
+As a [Vimtex](https://github.com/lervag/vimtex) user who was migrating to Neovim 0.5.0 and wanted to use the built-in LSP client, I started using the Texlab LSP server, which has facilities for calling build commands and such. Unlike Vimtex, though, Texlab won't read magic comments; build settings have to be specified globally, which is really unhelpful for folks who need to use more than one build process across different projects. I wrote this plugin to allow magic comments to be used with Texlab. In the Texlab config, the argument for the compiler program is swapped for a variable name that is defined according to the magic comment.
 
 ### FYI
 * If the document started out with no magic comment, the default (`pdflatex`) is used.
@@ -49,6 +52,8 @@ require'lspconfig'.texlab.setup{
 }
 ```
 ## Improvements
+- [ ] Allow for build processes to be specified by the user and given a name that the magic comment can point to
+- [ ] Make documentation
 
 ## Links
 * Helpful defaults for Neovim's built-in LSP client: [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
