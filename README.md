@@ -14,10 +14,10 @@ The plugin looks for the engine name in two places:
 1. In a table of custom build engines that you provide in `init.lua`/`init.vim` (via the `setup()` function).
 2. In the table of default build engines.
 
-The plugin provides three default build engines: `pdflatex`, `xelatex`, and `dvipspdf`). All of these use `latexmk`, and they are only made available via the `setup()` function. The user can also provide any number of custom build engines (see below).
+The plugin provides three default build engines: `pdflatex`, `xelatex`, and `dvipspdf`. All of these use `latexmk`, and they are only made available via the `setup` function. The user can also provide any number of custom build engines (see below).
 
-### Context
-As a [Vimtex](https://github.com/lervag/vimtex) user who was migrating to Neovim 0.5.0 and wanted to use the built-in LSP client, I started using the TexLab LSP server, which provides build commands. Unlike Vimtex, though, TexLab won't read magic comments; build settings have to be specified globally, which is really unhelpful for folks who need to different build engines for different projects. I wrote this plugin to allow magic comments to be used with TexLab's build command. In the TexLab config, the argument for the compiler program is swapped for a variable name that is defined according to the magic comment.
+### The need for this plugin
+As a [Vimtex](https://github.com/lervag/vimtex) user who was migrating to Neovim 0.5.0 and wanted to try using the built-in LSP client and as much Lua as possible, I started using the TexLab LSP server, which provides build functionality. Unlike Vimtex, TexLab build settings have to be specified globally, which is unhelpful for folks who need different build engines for different projects. I wrote this plugin to allow magic comments to be used with TexLab's build facilities. This makes TexLab's build functionality about as useful as Vimtex's build functionality and prevents me from needing to use Vimtex, which reduces the amount of Vimscript that needs to be interpreted.
 
 ### FYI
 * If the document started out with no magic comment, the default build engine (`pdflatex`) is selected. If you then write a magic comment, you'll need to close and reopen the file for it to be recognized.
