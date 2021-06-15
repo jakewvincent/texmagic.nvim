@@ -11,7 +11,7 @@ The plugin identifies magic comments at the very top of a LaTeX document (as bel
 ```
 The plugin looks for the engine name in two places:
 
-1. In a table of custom build engines that you provide in `init.lua`/`init.vim` (via the `setup()` function).
+1. In a table of custom build engines that you provide in `init.lua`/`init.vim` (via the `setup` function).
 2. In the table of default build engines.
 
 The plugin provides three default build engines: `pdflatex`, `xelatex`, and `dvipspdf`. All of these use `latexmk`, and they are only made available via the `setup` function. The user can also provide any number of custom build engines (see below).
@@ -98,6 +98,17 @@ require('lspconfig').texlab.setup{
     }
 }
 ```
+
+## Troubleshooting
+
+A few vim functions are defined that may help diagnose problems:
+
+* `TeXMagicShowComments`: returns any magic comments found at the top of your document
+* `TeXMagicCommentsFound`: returns a boolean indicating whether or not magic comments were found
+* `TeXMagicSetupStatus`: returns a boolean indicating whether TeXMagic's setup function was run
+* `TeXMagicSelectedProgram`: returns the name and source of the selected TeX program (if any was selected)
+* `TeXMagicConfigFound`: returns a boolean indicating whether any user-provided build engines were found
+* `TeXMagicLoaded`: returns the status of the plugin (if loaded, returns `1`)
 
 ## Improvements
 - [X] Allow for build processes to be specified by the user and given a name that the magic comment can point to
