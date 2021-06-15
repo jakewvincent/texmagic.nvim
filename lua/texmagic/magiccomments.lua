@@ -167,17 +167,17 @@ M.setup = function(user_config)
                 -- Remember where the selected program came from
                 M.magic_selected_program = "Program '"..TEX_program.."' selected from user-provided build engines."
                 -- If a config has been provided, see if it contains the requested program
-                TexMagicBuildConfig = user_config.engines[TEX_program]
+                TeXMagicBuildConfig = user_config.engines[TEX_program]
             elseif M.config_provided and M.config_defaults.engines[TEX_program] ~= nil then
                 -- Remember where the selected program came from
                 M.magic_selected_program = "Program '"..TEX_program.."' selected from default build engines."
                 -- If not in user config, see if the defaults contains the requested program
-                TexMagicBuildConfig = M.config_defaults.engines[TEX_program]
+                TeXMagicBuildConfig = M.config_defaults.engines[TEX_program]
             elseif M.config_provided then
                 -- Remember where the program came from
                 M.magic_selected_program = "Program '"..TEX_program.."' not found in user-provided or default build engines. Fell back on 'pdflatex'."
                 -- Otherwise, just use pdflatex
-                TexMagicBuildConfig = M.config_defaults.engines.pdflatex
+                TeXMagicBuildConfig = M.config_defaults.engines.pdflatex
             end
 
         else
