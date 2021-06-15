@@ -109,8 +109,6 @@ require('lspconfig').texlab.setup{
 2. Document is a `tex` document and did have a magic comment on open → the named build engine is selected from the custom build engines or the default build engines, or if it is in neither of those, pdflatex is selected as the build engine.
 3. A magic comment is added or changed *after* the document has been open → The previously loaded build engine will remain until the file is closed and reopened.
 
-#### 2.4.1 
-
 ## 3. Troubleshooting
 A few vim functions are defined that may help diagnose problems:
 
