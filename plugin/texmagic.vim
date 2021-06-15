@@ -34,6 +34,9 @@ command! TeXMagicSelectedProgram lua print(require('texmagic').magic_selected_pr
 " Returns a boolean indicating whether a user config was found
 command! TeXMagicConfigFound lua print(require('texmagic').config_provided)
 
+" Returns status of plugin
+command! TeXMagicLoaded echo g:loaded_texmagic
+
 let &cpo = s:save_cpo                                   " restore user coptions
 unlet s:save_cpo
 
