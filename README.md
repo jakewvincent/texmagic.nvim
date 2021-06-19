@@ -64,6 +64,7 @@ require('texmagic').setup{
                 "-pdflatex",
                 "-interaction=nonstopmode",
                 "-synctex=1",
+                "-outdir=.build",
                 "-pv",
                 "%f"
             },
@@ -99,7 +100,7 @@ require('lspconfig').texlab.setup{
             --      ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑
             forwardSearch = {
                 executable = "evince",
-                args = {"-f"}
+                args = {"%p"}
             }
         }
     }
