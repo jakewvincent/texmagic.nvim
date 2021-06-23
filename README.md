@@ -1,4 +1,4 @@
-![Banner](assets/images/banner.png)
+![Banner](assets/images/banner.gif)
 
 # TeXMagic.nvim
 ## 1. Introduction
