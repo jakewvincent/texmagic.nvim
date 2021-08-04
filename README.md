@@ -55,7 +55,7 @@ require('paq')({
     -- Your other plugins;
 })
 
--- Include the setup function somewhere else in your init.lua/vim file, or the
+-- Include the setup function somewhere else in your init.lua file, or the
 -- plugin won't activate itself:
 require('texmagic').setup({
     -- Config goes here; leave blank for defaults
@@ -79,8 +79,8 @@ git clone https://github.com/jakewvincent/texmagic.nvim.git ~/.vim/bundle/texmag
 " Dein
 call dein#add('jakewvincent/texmagic.nvim')
 
--- Include the setup function somewhere else in your init.vim file, or the
--- plugin won't activate itself:
+" Include the setup function somewhere else in your init.vim file, or the
+" plugin won't activate itself:
 lua << EOF
 require('texmagic').setup({
     -- Config goes here; leave blank for defaults
