@@ -1,6 +1,6 @@
 ![Banner](assets/images/banner.gif)
 
-Jump to: [Description](#-description) / [Requirements](#-requirements) / [Installation](#-installation) / [Configuration](#-configuration) / [Troubleshooting](#-troubleshooting) / [To do](#-to-do) / [Links](#-links)
+Jump to: [Description](#-description) / [Requirements](#-requirements) / [Installation](#-installation) / [Configuration](#%EF%B8%8F-configuration) / [Troubleshooting](#-troubleshooting) / [To do](#%EF%B8%8F-to-do) / [Links](#-links)
 
 ## 📝 Description
 T<sub>E</sub>XMagic is a very simple [Neovim](https://neovim.io) plugin that facilitates LaTeX build engine selection via magic comments. It is designed with the [TexLab](https://github.com/latex-lsp/texlab) LSP server's build service in mind, which at the time of this plugin's making had to be specified in `init.lua`/`vim` and could not be set on a by-project basis.
