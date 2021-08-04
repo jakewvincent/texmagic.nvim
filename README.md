@@ -30,13 +30,64 @@ Currently, anyone who wishes to use TexLab's build service can only specify a gl
     - Vimscript: `let g:tex_flavor = 'latex'`
 
 ## 📦 Installation
-Install using your preferred package manager. Using [paq-nvim](https://github.com/savq/paq-nvim), for instance:
+Install using your preferred package manager.
 
+For the default build engines to be available, **you must call the setup function in your `init.lua`/`vim`**. Once it is called, the global variable `_G.TeXMagicBuildConfig` becomes available and can be used to value the `build` key in your TexLab LSP server config.
+
+### init.lua
+#### [Packer](https://github.com/wbthomason/packer.nvim)
 ```lua
-require('paq-nvim').paq{'jakewvincent/texmagic.nvim'}
+use({'jakewvincent/texmagic.nvim',
+     config = function()
+        require('texmagic').setup({
+            -- Config goes here; leave blank for defaults
+        })
+     end
+})
 ```
 
-For the default build engines to be available, you must call the setup function in your `init.lua`/`vim`. Once it is called, the global variable `_G.TeXMagicBuildConfig` becomes available and can be used to value the `build` key in your TexLab LSP server config.
+#### [Paq](https://github.com/savq/paq-nvim)
+
+```lua
+require('paq')({
+    -- Your other plugins;
+    'jakewvincent/texmagic.nvim';
+    -- Your other plugins;
+})
+
+-- Include the setup function somewhere else in your init.lua/vim file, or the
+-- plugin won't activate itself:
+require('texmagic').setup({
+    -- Config goes here; leave blank for defaults
+})
+```
+
+### init.vim
+```vim
+" Vim-Plug
+Plug 'jakewvincent/texmagic.nvim'
+
+" NeoBundle
+NeoBundle 'jakewvincent/texmagic.nvim'
+
+" Vundle
+Bundle 'jakewvincent/texmagic.nvim'
+
+" Pathogen
+git clone https://github.com/jakewvincent/texmagic.nvim.git ~/.vim/bundle/texmagic.nvim
+
+" Dein
+call dein#add('jakewvincent/texmagic.nvim')
+
+-- Include the setup function somewhere else in your init.vim file, or the
+-- plugin won't activate itself:
+lua << EOF
+require('texmagic').setup({
+    -- Config goes here; leave blank for defaults
+})
+EOF
+```
+
 
 ## ⚙️ Configuration
 ### Default build engines only
