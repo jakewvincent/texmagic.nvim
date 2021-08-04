@@ -1,8 +1,9 @@
 ![Banner](assets/images/banner.gif)
 
-# 🪄 T<sub>E</sub>XMagic
-### 📝 Description
-This is a simple, lightweight [Neovim](https://neovim.io) plugin that facilitates LaTeX build engine selection via magic comments. It is designed with the [TexLab](https://github.com/latex-lsp/texlab) LSP server's build service in mind, which at the time of this plugin's making had to be specified in `init.lua`/`vim` and could not be set on a by-project basis.
+Jump to: [Description](#-description) / [Requirements](#-requirements) / [Installation](#-installation) / [Configuration](#-configuration) / [Troubleshooting](#-troubleshooting) / [To do](#-to-do) / [Links](#-links)
+
+## 📝 Description
+T<sub>E</sub>XMagic is a very simple [Neovim](https://neovim.io) plugin that facilitates LaTeX build engine selection via magic comments. It is designed with the [TexLab](https://github.com/latex-lsp/texlab) LSP server's build service in mind, which at the time of this plugin's making had to be specified in `init.lua`/`vim` and could not be set on a by-project basis.
 
 The plugin identifies magic comments at the very top of a LaTeX document (as below) and will currently only extract magic TeX *program* comments, which specify the name of a build "engine" or toolchain.
 
@@ -27,11 +28,6 @@ Currently, anyone who wishes to use TexLab's build service can only specify a gl
 - Set `g:texflavor` to `latex`.
     - Lua: `vim.g['tex_flavor'] = 'latex'`
     - Vimscript: `let g:tex_flavor = 'latex'`
-
-### ☑️ To do
-- [X] Allow for build processes to be specified by the user and given a name that the magic comment can point to
-- [ ] Make documentation
-- [ ] Allow plugin to be restarted and TexLab's build settings to be reloaded without closing file, e.g. in the event that a magic comment is added or changed
 
 ## 📦 Installation
 Install using your preferred package manager. Using [paq-nvim](https://github.com/savq/paq-nvim), for instance:
@@ -121,6 +117,11 @@ A few vim functions are defined that may help diagnose problems:
 * `TeXMagicSelectedProgram`: returns the name and source of the selected TeX program (if any was selected)
 * `TeXMagicConfigFound`: returns a boolean indicating whether any user-provided build engines were found
 * `TeXMagicLoaded`: returns the status of the plugin (if loaded, returns `1`)
+
+## ☑️ To do
+- [X] Allow for build processes to be specified by the user and given a name that the magic comment can point to
+- [ ] Make documentation
+- [ ] Allow plugin to be restarted and TexLab's build settings to be reloaded without closing file, e.g. in the event that a magic comment is added or changed
 
 ## 🔗 Links
 * [TexLab LSP server](https://github.com/latex-lsp/texlab) 
