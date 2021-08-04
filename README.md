@@ -54,7 +54,8 @@ The user can also specify different build engines. If these have the same name a
 -- Run setup and specify two custom build engines
 require('texmagic').setup{
     engines = {
-        pdflatex = {    -- This has the same name as a default engine but will be preferred
+        pdflatex = {    -- This has the same name as a default engine but would
+                        -- be preferred over the same-name default if defined
             executable = "latexmk",
             args = {
                 "-pdflatex",
@@ -66,7 +67,8 @@ require('texmagic').setup{
             },
             isContinuous = false
         },
-        lualatex = {    -- This is *not* one of the defaults, but it can be called via magic comment if defined here
+        lualatex = {    -- This is *not* one of the defaults, but it can be
+                        -- called via magic comment if defined here
             executable = "latexmk"
             args = {
                 "-pdflua",
