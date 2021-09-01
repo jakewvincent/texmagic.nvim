@@ -120,7 +120,7 @@ require('texmagic').setup{
         },
         lualatex = {    -- This is *not* one of the defaults, but it can be
                         -- called via magic comment if defined here
-            executable = "latexmk"
+            executable = "latexmk",
             args = {
                 "-pdflua",
                 "-interaction=nonstopmode",
