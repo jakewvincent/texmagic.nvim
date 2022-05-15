@@ -179,4 +179,4 @@ A few vim functions are defined that may help diagnose problems:
 ## 🔗 Links
 * [TexLab LSP server](https://github.com/latex-lsp/texlab) 
 * [nvim-lspconfig: Helpful defaults for Neovim's LSP client](https://github.com/neovim/nvim-lspconfig)
-* [Config for TexLab via nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#texlab)
+* [Config for TexLab via nvim-lspconfig](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#texlab)
