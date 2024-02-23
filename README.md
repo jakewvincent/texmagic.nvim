@@ -130,9 +130,14 @@ require('texmagic').setup{
             },
             isContinuous = false
         }
-    }
+    },
+    default_engine = "lualatex",
 }
 ```
+
+The user can also specify a default build engine if no magic comments are found.
+If default_engine is not set pdflatex is used as a fallback.
+
 
 ### Pass the global build variable to build config
 After calling the setup function, interface your [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) TeXLab setup with TeXMagic using the global variable `_G.TeXMagicBuildConfig`. If I'm using TexLab's build service and want to allow the build engine to vary based on my magic comments, I'll use `_G.TeXMagicBuildConfig` to value the `build` key in my TexLab config table (such as below).
