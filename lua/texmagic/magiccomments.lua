@@ -113,7 +113,8 @@ M.config_defaults = {
                 "%f"
             }
         }
-    }
+    },
+    default_engine = "pdflatex",
 }
 
 -------------------------------------
@@ -140,6 +141,15 @@ M.setup = function(user_config)
     -- If it's a tex file, do some stuff
     if ext == "tex" then
 
+        -- Check if a user config has been provided
+        for key, value in pairs(user_config) do
+            if value then
+                M.config_provided = true
+            else
+                M.config_provided = false
+            end
+        end
+
         if #M.findMagicComments(buffer) > 0 then
 
             -- Keep "found" status in variable for user to check
@@ -151,15 +161,6 @@ M.setup = function(user_config)
             -- If there was no program comment in the magic comments,
             -- value the variable as an empty string.
             if TEX_program == nil then TEX_program = "" end
-
-            -- Check if a user config has been provided
-            for key, value in pairs(user_config) do
-                if value then
-                    M.config_provided = true
-                else
-                    M.config_provided = false
-                end
-            end
 
             -- If one was provided, check it for the requested program; then check
             -- the defaults; then fall back on pdflatex if needed.
@@ -175,9 +176,16 @@ M.setup = function(user_config)
                 TeXMagicBuildConfig = M.config_defaults.engines[TEX_program]
             elseif M.config_provided then
                 -- Remember where the program came from
-                M.magic_selected_program = "Program '"..TEX_program.."' not found in user-provided or default build engines. Fell back on 'pdflatex'."
-                -- Otherwise, just use pdflatex
-                TeXMagicBuildConfig = M.config_defaults.engines.pdflatex
+                M.magic_selected_program = "Program '"..TEX_program.."' not found in user-provided or default build engines. "
+                -- Otherwise, use the default engine from the user config
+                if user_config.default_engine ~= nil and user_config.engines[user_config.default_engine] ~= nil then
+                    M.magic_selected_program = M.magic_selected_program .. "Fell back on user specified default."
+                    TeXMagicBuildConfig = user_config.engines[user_config.default_engine]
+                else
+                    -- If no default was provided, fall back on the default engine from the defaults
+                    M.magic_selected_program = M.magic_selected_program .. "Fell back on default."
+                    TeXMagicBuildConfig = M.config_defaults.engines[M.config_defaults.default_engine]
+                end
             end
 
         else
@@ -185,6 +193,23 @@ M.setup = function(user_config)
             -- Keep "not found" status in variable for user to check
             M.magic_comments_found = false
 
+            -- If no magic comments were found, use the default engine
+            -- if a user config was provided, use the default engine from that
+            if
+                M.config_provided
+                and user_config.default_engine ~= nil
+                and user_config.engines[user_config.default_engine] ~= nil
+            then
+                M.magic_selected_program = "No Magic Comment found Program '"
+                  .. user_config.default_engine
+                  .. "' set as default in the user-provided build engines."
+                TeXMagicBuildConfig = user_config.engines[user_config.default_engine]
+            else
+                M.magic_selected_program = "No Magic Comment found Program and no user default provided. Using '"
+                  .. user_config.default_engine
+                  .. "' as fallback."
+                TeXMagicBuildConfig = M.config_defaults.engines[M.config_defaults.default_engine]
+            end
         end
     end
 end
