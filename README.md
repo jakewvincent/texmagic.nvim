@@ -32,7 +32,7 @@ Currently, anyone who wishes to use TexLab's build service can only specify a gl
 ## 📦 Installation
 Install using your preferred package manager.
 
-For the default build engines to be available, **you must call the setup function in your `init.lua`/`vim`**. Once it is called, the global variable `_G.TeXMagicBuildConfig` becomes available and can be used to value the `build` key in your TexLab LSP server config.
+For the default build engines to be available, **you must call the setup function in your `init.lua`/`vim`**. Once it is called, the resolved build config is available via `require('texmagic').buildConfig` (or the legacy global `_G.TeXMagicBuildConfig`) and can be used to value the `build` key in your TexLab LSP server config.
 
 ### init.lua
 #### [Packer](https://github.com/wbthomason/packer.nvim)
@@ -134,8 +134,11 @@ require('texmagic').setup{
 }
 ```
 
-### Pass the global build variable to build config
-After calling the setup function, interface your [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) TeXLab setup with TeXMagic using the global variable `_G.TeXMagicBuildConfig`. If I'm using TexLab's build service and want to allow the build engine to vary based on my magic comments, I'll use `_G.TeXMagicBuildConfig` to value the `build` key in my TexLab config table (such as below).
+### Pass the build config to TexLab
+After calling the setup function, interface your [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) TeXLab setup with TeXMagic. The resolved build config is available in two ways:
+
+- **`require('texmagic').buildConfig`** (preferred) — standard module-level access
+- **`_G.TeXMagicBuildConfig`** — legacy global, still set for backwards compatibility
 
 ```lua
 require('lspconfig').texlab.setup{
@@ -144,9 +147,9 @@ require('lspconfig').texlab.setup{
     settings = {
         texlab = {
             rootDirectory = nil,
-            --      ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓
-            build = _G.TeXMagicBuildConfig,
-            --      ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑
+            --      ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓
+            build = require('texmagic').buildConfig,
+            --      ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑ ↑
             forwardSearch = {
                 executable = "evince",
                 args = {"%p"}

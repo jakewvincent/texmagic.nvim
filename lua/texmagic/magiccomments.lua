@@ -180,6 +180,9 @@ M.setup = function(user_config)
                 TeXMagicBuildConfig = M.config_defaults.engines.pdflatex
             end
 
+            -- Expose on module table so consumers can use require('texmagic').buildConfig
+            M.buildConfig = TeXMagicBuildConfig
+
         else
 
             -- Keep "not found" status in variable for user to check
